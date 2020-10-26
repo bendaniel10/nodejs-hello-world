@@ -8,7 +8,6 @@ pipeline {
             environment { HOME="." }
             steps {
                 sh 'npm install eslint --save-dev'
-                sh 'pwd'
                 sh 'npx eslint *.js'
             }
         }
