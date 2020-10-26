@@ -7,7 +7,7 @@ pipeline {
             }
             environment { HOME="." }
             steps {
-                sh 'npm install'
+                sh 'npm install eslint --save-dev'
                 sh 'npx eslint *.js'
             }
         }
