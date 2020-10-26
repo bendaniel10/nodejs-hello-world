@@ -1,12 +1,13 @@
 pipeline {
     agent none
     stages {
-        stage('Test') {
+        stage('Linting') {
             agent {
                 docker { image 'node:15-alpine' }
             }
             steps {
                 sh 'npm install'
+                sh 'npm run lint'
             }
         }
     }
