@@ -1,0 +1,6 @@
+- name: Configuring the Jenkins server
+  hosts: all
+  user: ubuntu
+  roles:
+    - role: configure_jenkins
+      become: true

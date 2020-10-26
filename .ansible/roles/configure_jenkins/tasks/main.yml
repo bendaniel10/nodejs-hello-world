@@ -1,0 +1,13 @@
+- name: "Download docker"
+  shell: |
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sudo sh get-docker.sh
+
+- name: "Run jenkins"
+  shell: |
+    docker run -d -p 8080:8080 -p 50000:50000 jenkins/jenkins
+  register: debug_output
+
+- debug: msg="{{ debug_output.stdout }}"
+
+- debug: msg="{{ debug_output.stderr }}"
