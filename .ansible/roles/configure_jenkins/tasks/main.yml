@@ -19,13 +19,18 @@
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
 
-- name: "Run jenkins"
+- name: "Install java"
   shell: |
-    mkdir -p /root/jenkins_home
-    sudo chown -R 1000 /root/jenkins_home
-    docker run -d -p 8080:8080 -p 50000:50000 -v /root/jenkins_home:/var/jenkins_home jenkins/jenkins
-  register: debug_output
+    yes | sudo apt install default-jre
+    yes | sudo apt install default-jdk
 
-- debug: msg="{{ debug_output.stdout }}"
+- name: "Install jenkins"
+  shell: |
+    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+    sudo apt update
+    yes | sudo apt install jenkins
 
-- debug: msg="{{ debug_output.stderr }}"
+- name: "Start jenkins"
+  shell: |
+    sudo systemctl start jenkins
