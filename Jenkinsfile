@@ -6,7 +6,8 @@ pipeline {
                 docker { image 'node:15-alpine' }
             }
             steps {
-                sh 'node --version'
+                sh 'npm install'
+                sh 'npm start'
             }
         }
     }
