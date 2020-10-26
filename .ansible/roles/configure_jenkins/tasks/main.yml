@@ -5,7 +5,9 @@
 
 - name: "Run jenkins"
   shell: |
-    docker run -d -p 8080:8080 -p 50000:50000 jenkins/jenkins
+    mkdir -p /root/jenkins_home
+    sudo chown -R 1000 /root/jenkins_home
+    docker run -d -p 8080:8080 -p 50000:50000 -v /root/jenkins_home:/var/jenkins_home jenkins/jenkins
   register: debug_output
 
 - debug: msg="{{ debug_output.stdout }}"

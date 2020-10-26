@@ -1,2 +1,2 @@
 [all]
-18.197.229.49
+ec2-35-158-107-120.eu-central-1.compute.amazonaws.com
