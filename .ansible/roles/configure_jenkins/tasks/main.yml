@@ -1,3 +1,19 @@
+- name: "update apt packages."
+  apt:
+    update_cache: yes
+
+- name: "upgrade packages"
+  apt:
+    upgrade: yes
+
+- name: remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
+- name: install node
+  shell: |
+    curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash - && sudo apt-get install -y nodejs
+
 - name: "Download docker"
   shell: |
     curl -fsSL https://get.docker.com -o get-docker.sh
