@@ -14,11 +14,6 @@
   shell: |
     curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash - && sudo apt-get install -y nodejs
 
-- name: "Download docker"
-  shell: |
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sudo sh get-docker.sh
-
 - name: "Install java"
   shell: |
     yes | sudo apt install default-jre
@@ -34,3 +29,10 @@
 - name: "Start jenkins"
   shell: |
     sudo systemctl start jenkins
+
+- name: "Download docker"
+  shell: |
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sudo sh get-docker.sh
+    sudo usermod -aG docker jenkins
+    sudo usermod -aG docker ubuntu
