@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Success: no test specified\"",
-    "lint": "./node_modules/.bin/eslint *.js"
+    "test": "echo \"Success: no test specified\""
   },
   "repository": {
     "type": "git",
