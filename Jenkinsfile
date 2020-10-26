@@ -5,6 +5,7 @@ pipeline {
             agent {
                 docker { image 'node:15-alpine' }
             }
+            environment { HOME="." }
             steps {
                 sh 'npm install'
                 sh 'npm run lint'
