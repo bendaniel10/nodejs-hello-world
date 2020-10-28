@@ -14,6 +14,11 @@
   shell: |
     curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash - && sudo apt-get install -y nodejs
 
+- name: install hadolint
+  shell: |
+    wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
+    chmod +x /bin/hadolint
+
 - name: "Install java"
   shell: |
     yes | sudo apt install default-jre
@@ -36,3 +41,22 @@
     sudo sh get-docker.sh
     sudo usermod -aG docker jenkins
     sudo usermod -aG docker ubuntu
+
+- name: "Download k8"
+  shell: |
+    sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+    sudo apt-get update
+    sudo apt-get install -y kubectl
+
+- name: "Install minikube"
+  shell: |
+    curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+      && chmod +x minikube
+    sudo cp minikube /usr/local/bin && rm minikube
+
+- name: "Start minikube"
+  shell: |
+    minikube start
+

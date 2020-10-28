@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+/jenkins.pem
+/local.properties
+.kubernetes
+.ansible
+/screenshots
+Jenkinsfile
