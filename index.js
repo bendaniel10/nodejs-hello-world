@@ -2,7 +2,7 @@ var http = require('http')
 
 var server = http.createServer(function (request, response) {
   response.writeHead(200, { 'Content-Type': 'text/plain' })
-  response.end('Hello World! << Capstone Project >> Blue.')
+  response.end('Hello World! << Capstone Project >> This is the blue deployment.')
 })
 
 var port = 80
