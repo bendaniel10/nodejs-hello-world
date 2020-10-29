@@ -53,10 +53,10 @@ pipeline {
                 sh 'docker push bendaniel10/udacity-project-capstone:prod'
             }
         }
-        stage('Deploy app on cluser') {
+        stage('Deploy app on cluster') {
             agent any
             steps {
-                sh 'whoami'
+                sh 'aws eks update-kubeconfig --name udacity-project-capstone'
                 sh 'kubectl apply -f .kubernetes/config.yaml'
             }
         }
