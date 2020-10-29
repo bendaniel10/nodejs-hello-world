@@ -1,4 +1,5 @@
-# nodejs-hello-world
-Hello World sample
+# Udacity Capstone Project
 
-See [Manage Google Compute Engine with Node.js](https://medium.com/@fhinkel/manage-google-compute-engine-with-node-js-eef8e7a111b4) on Medium.
+Set up: 
+- Uses ansible, docker, eksctl, kubectl.
+- Configure environment variables in the jenkins_playbook.yml

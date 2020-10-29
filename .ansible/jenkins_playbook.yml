@@ -2,5 +2,14 @@
   hosts: all
   user: ubuntu
   roles:
+    - role: weareinteractive.environment
+      become: true
     - role: configure_jenkins
       become: true
+  vars:
+    environment_config:
+      AWS_ACCESS_KEY_ID: "{{ lookup('env','CAPSTONE_AWS_ACCESS_KEY_ID') }}"
+      AWS_SECRET_ACCESS_KEY: "{{ lookup('env','CAPSTONE_AWS_SECRET_ACCESS_KEY') }}"
+      AWS_DEFAULT_REGION: "{{ lookup('env','CAPSTONE_AWS_DEFAULT_REGION') }}"
+      DOCKER_USERNAME: "{{ lookup('env','CAPSTONE_DOCKER_USERNAME') }}"
+      DOCKER_PASSWORD: "{{ lookup('env','CAPSTONE_DOCKER_PASSWORD') }}"

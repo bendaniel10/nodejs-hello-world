@@ -10,9 +10,21 @@
   apt:
     autoremove: yes
 
+- name: "Install zip utility."
+  apt:
+    name: [ "zip", "unzip" ]
+    state: latest
+    update_cache: yes
+
 - name: install node
   shell: |
     curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash - && sudo apt-get install -y nodejs
+
+- name: install awscli
+  shell: |
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
 
 - name: install hadolint
   shell: |
@@ -35,12 +47,20 @@
   shell: |
     sudo systemctl start jenkins
 
+- name: "Install pass to save docker credentials"
+  shell: |
+    yes | sudo apt-get install pass
+
 - name: "Download docker"
   shell: |
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
     sudo usermod -aG docker jenkins
     sudo usermod -aG docker ubuntu
+
+- name: "Docker login"
+  shell: |
+    docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
 
 - name: "Download k8"
   shell: |
@@ -57,6 +77,11 @@
     sudo cp minikube /usr/local/bin && rm minikube
 
 - name: "Start minikube"
+  become: false # because the docker driver should not be used with root privileges
   shell: |
-    minikube start
+    minikube start --driver=docker
+
+- name: "Configure kubectl for Amazon EKS cluster"
+  shell: |
+    aws eks update-kubeconfig --name udacity-project-capstone
 
