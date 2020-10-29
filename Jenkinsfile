@@ -48,17 +48,9 @@ pipeline {
             agent any
             steps {
                 sh 'docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD'
-                sh 'docker build --tag=udacity-project-capstone:$BUILD_NUMBER .'
-                sh 'docker tag udacity-project-capstone:$BUILD_NUMBER bendaniel10/udacity-project-capstone:$BUILD_NUMBER'
-                sh 'docker push bendaniel10/udacity-project-capstone:$BUILD_NUMBER'
-            }
-        }
-        stage('Update docker image template in k8 config') {
-            agent any
-            steps {
-                sh 'cd .kubernetes \
-                      sed -i "s/%DOCKER_IMAGE_TAG%/$BUILD_NUMBER/g" config.yaml'
-                sh 'cat .kubernetes/config.yaml'
+                sh 'docker build --tag=udacity-project-capstone:prod .'
+                sh 'docker tag udacity-project-capstone:prod bendaniel10/udacity-project-capstone:prod'
+                sh 'docker push bendaniel10/udacity-project-capstone:prod'
             }
         }
         stage('Deploy app on cluster') {
@@ -66,6 +58,7 @@ pipeline {
             steps {
                 sh 'aws eks update-kubeconfig --name udacity-project-capstone'
                 sh 'kubectl apply -f .kubernetes/config.yaml'
+                sh 'kubectl rollout restart deployment/udacity-project-capstone-deployment'
             }
         }
     }

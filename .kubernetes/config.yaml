@@ -17,7 +17,7 @@ spec:
       containers:
         - name: laravel-app
           imagePullPolicy: Always
-          image: bendaniel10/udacity-project-capstone:%DOCKER_IMAGE_TAG%
+          image: bendaniel10/udacity-project-capstone:prod
           ports:
             - containerPort: 80
 
