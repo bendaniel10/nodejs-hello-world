@@ -57,7 +57,7 @@ pipeline {
             agent any
             steps {
                 sh 'cd .kubernetes \
-                      sed -i \'s/%DOCKER_IMAGE_TAG%/$BUILD_NUMBER/g\' config.yaml'
+                      sed -i "s/%DOCKER_IMAGE_TAG%/$BUILD_NUMBER/g" config.yaml'
                 sh 'cat .kubernetes/config.yaml'
             }
         }
