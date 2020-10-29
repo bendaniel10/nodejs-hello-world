@@ -21,9 +21,7 @@ pipeline {
             }
         }
         stage('Linting Dockerfile') {
-            agent {
-                any
-            }
+            agent any
             environment { HOME="." }
             steps {
                 sh 'hadolint Dockerfile'
@@ -48,9 +46,7 @@ pipeline {
             }
         }
         stage('Publish docker image') {
-            agent {
-                any
-            }
+            agent any
             steps {
                 sh 'docker build --tag=udacity-project-capstone:prod .'
                 sh 'docker tag udacity-project-capstone:prod bendaniel10/udacity-project-capstone:prod'
@@ -58,9 +54,7 @@ pipeline {
             }
         }
         stage('Deploy app on cluser') {
-            agent {
-                any
-            }
+            agent any
             steps {
                 sh 'kubectl apply -f .kubernetes/config.yaml'
             }
