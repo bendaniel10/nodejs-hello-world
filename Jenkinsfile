@@ -54,6 +54,7 @@ pipeline {
             }
         }
         stage('Clean old docker image'){
+            agent any
             steps {
                 sh "docker rmi bendaniel10/udacity-project-capstone:prod"
             }
