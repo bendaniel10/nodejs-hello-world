@@ -53,6 +53,11 @@ pipeline {
                 sh 'docker push bendaniel10/udacity-project-capstone:prod'
             }
         }
+        stage('Clean old docker image'){
+            steps {
+                sh "docker rmi bendaniel10/udacity-project-capstone:prod"
+            }
+        }
         stage('Deploy app on cluster') {
             agent any
             steps {
