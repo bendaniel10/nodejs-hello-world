@@ -77,7 +77,3 @@
   shell: |
     minikube start --driver=docker
 
-- name: "Configure kubectl for Amazon EKS cluster"
-  shell: |
-    aws eks update-kubeconfig --name udacity-project-capstone
-
