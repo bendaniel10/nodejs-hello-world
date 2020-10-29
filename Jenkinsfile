@@ -56,9 +56,9 @@ pipeline {
         stage('Update docker image template in k8 config') {
             agent any
             steps {
-
                 sh 'cd .kubernetes \
                       sed -i s/%DOCKER_IMAGE_TAG%/$BUILD_NUMBER/g config.yaml'
+                sh 'cat .kubernetes/config.yaml'
             }
         }
         stage('Deploy app on cluster') {
