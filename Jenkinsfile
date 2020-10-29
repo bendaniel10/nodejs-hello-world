@@ -17,7 +17,6 @@ pipeline {
             environment { HOME="." }
             steps {
                 sh 'npx eslint *.js'
-                sh 'hadolint Dockerfile'
             }
         }
         stage('Linting Dockerfile') {
