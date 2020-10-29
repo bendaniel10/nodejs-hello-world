@@ -56,6 +56,7 @@ pipeline {
         stage('Deploy app on cluser') {
             agent any
             steps {
+                sh 'whoami'
                 sh 'kubectl apply -f .kubernetes/config.yaml'
             }
         }
